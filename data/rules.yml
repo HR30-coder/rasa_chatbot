@@ -1,0 +1,33 @@
+version: "3.1"
+
+rules:
+
+# - rule: Greet when user greets
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Rely to user detail query
+  steps:
+  - intent: user_details
+  - action: utter_user_details
+
+- rule: Handle low confidence intents or ambigous
+  steps:
+  - intent: nlu_fallback
+  - action: utter_fallback_response
+
+- rule: out-of-scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope

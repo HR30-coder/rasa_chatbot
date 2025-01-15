@@ -1,0 +1,110 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - Hello
+    - Hi
+    - Hey
+    - Good morning
+    - Hi there
+    - Greetings
+    - Hey there
+    - Hello, I'm Alice
+    - Hi, my name is John
+    - I’m Tim
+    - I am Sarah
+    - Myself Karan  
+    - Hi, I’m Emily
+    - Hello, I’m Alex
+    - Greetings, my name’s Robert
+    - My name is Rajesh Kumar
+    - myself Kartik
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: inform_email
+  examples: |
+    - My email is [john.doe@example.com](email)
+    - You can reach me at [test.email123@gmail.com](email)
+    - reach me at [test.email123@gmail.com](email)
+    - email is [j.smith@domain.com](email)
+    - My contact email is [admin@website.net](email)
+    - It is [hr30@gmail.com](email)
+    - [hcr30@gmail.com](email)
+
+- intent: user_details
+  examples: |
+    - What is my [role](role) in the company?
+    - Can you tell me about my [position](role)?
+    - What [system](system) am I using right now?
+    - What [platform](system) is assigned to me?
+    - Tell me what [business area](business) I belong to.
+    - What’s my [position](role) here?
+    - Who am I working with in terms of [business](business)?
+    - Which [system](system) do I have access to?
+    - I need to know my [role](role) in the company.
+    - What [role](role) do I have within the business?
+    - Can you explain which [system](system) I’m a part of?
+    - What [business function](business) am I responsible for?
+    - I’m looking for information about my [role](role).
+    - What’s the [system](system) I’m currently working on?
+    - Which [business area](business) am I assigned to?
+    - Can you clarify my [system](system) access?
+    - What is my [function](role) in the company?
+    - Can you tell me what [business unit](business) I belong to?
+    - Could you remind me of the [system](system) I work with?
+    - What [platform](system) do I operate on?
+    - Which [business team](business) am I part of?
+    - What [role](role) do I hold in the system?
+    - What [area of the business](business) am I working on?
+    - what is my [team](business) ?
+
+- intent: out_of_scope
+  examples: |
+    - I want to order food
+    - What is 2 + 2?
+    - Who's the US President?
+    - What is a lion?
+    - i want something
+
+
+regex:
+  - name: email
+    pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
