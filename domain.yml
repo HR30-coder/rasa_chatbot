@@ -1,34 +1,51 @@
-version: '3.1'
+version: "3.1"
+
 intents:
-- affirm
-- bot_challenge
-- deny
-- goodbye
-- greet
-- nlu_fallback
-- out_of_scope
-- user_details
-- inform_email
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - inform_email
+  - user_details
+  - faq_important_data
+  - faq_about_portal
+  - faq_about_process
+  - document_search
+  - flagged_intent
+  # - faq_kpi_portal
+  # - faq_track_downtime
+  # - faq_subprocesses
+  # - faq_check_downtime_system
+  # - faq_contact_help
+  - out_of_scope
+  - nlu_fallback
 
 entities:
-- business
-- role
-- system
-- email
-- NAME
-
+  - email
+  - role
+  - system
+  - business
+  - DATE
+  - support
+  - downtime
+  - subprocess
+  - user
 
 slots:
-  name:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: NAME
   email:
     type: text
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: email
+
+forms:
+  email_form:
+    required_slots:
+      - email
 
 synonyms:
   role:
@@ -50,33 +67,112 @@ synonyms:
   - business area
   - division
 
+  downtime:
+  - downtime
+  - system downtime
+  - process downtime
+  - service outage
+  - system outage
+  - downtime tracking
+  - outage time
+  - service disruption
+  - downtime report
+
+  subprocess:
+  - subprocess
+  - process
+  - processes
+  - sub-process
+  - task
+  - operation
+  - procedure
+  - workflow
+  - business process
+  - kpi
+
+  support:
+  - support
+  - help
+  - assistance
+  - contact support
+  - contact help
+  - technical support
+  - customer support
+  - get help
+  - reach support
+  - help desk
+  - support team
+  - assistance team
+
+  user:
+  - user
+  - users
+  - people
+  - person
+
 responses:
-  utter_did_that_help:
-  - text: Did that help you?
-  utter_goodbye:
-  - text: Bye
-  utter_iamabot:
-  - text: I am a bot, powered by Rasa.
-  utter_user_details:
-  - text: fetching details of module for {email}. Your role is admin!!
-  utter_introduce:
-  - text: Hello can i please know your name?
-  utter_greet_user:
-  - text: Nice to meet you, {name}! How can i help you?
   utter_greet:
-  - text: Nice to meet you!! How can i help you?
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_email_received:
+  - text: "I have received your email: {email}"
+
   utter_ask_email:
-  - text: Pls tell me you official email id.
-  utter_email:
-  - text: Got it! Your email is {email}.
-  utter_ask_email_name:
-  - text: Hi {name}!Pls tell me you official email id..
-  utter_fallback_response:
-  - text: sorry i couldn't understand pls rephrase it
-  utter_default:
-  - text: Sorry I didn't understand the context.pls stick to the flow?
+    - text: "Could you please provide your email so I can fetch your details?"
+
+  utter_fetching:
+    - text: "Fetching your details now."
+
+  utter_user_details:
+    - text: "Your role is admin and you belong to 3in1 team"
+  
+  utter_faq_kpi_portal:
+    - text: "The KPI Portal is a system designed for tracking the downtime of various processes and subprocesses within different systems. It helps monitor the performance of key processes."
+  
+  utter_faq_track_downtime:
+    - text: "To track downtime in the KPI portal, go to the 'Downtime Tracking' section, select the system or process you wish to monitor, and view the detailed report of downtime events."
+
+  utter_faq_subprocesses:
+    - text: "The KPI portal tracks subprocesses such as system initialization, process execution, and error handling for various processes. You can view the detailed subprocesses within the portal."
+
+  utter_faq_check_downtime_system:
+    - text: "To check downtime for a specific system, go to the 'Systems Overview' section in the KPI portal. Select the system you want to view, and you’ll get an overview of the downtime records."
+
+  utter_faq_contact_help:
+    - text: "If you need help with the KPI portal, please contact the support team at support@kpiportal.com. You can also visit the help section in the portal for guides and FAQs."
+
+  utter_sorry_cant_reveal:
+    - text: "Sorry, I can't reveal that."
+
   utter_out_of_scope:
-  - text: Sorry, It is out of scope.
+    - text: "The topic is out of my scope i can help you with only kpi specific queries"
+
+  utter_fallback_response:
+    - text: "sorry i couldn't understand pls rephrase it"
+
+  utter_default:
+    - text: "dont deviate pls provide email!!"
+  
+actions:
+  - action_handle_faq_query
+  - action_fetch_important_data
+  - action_document_search
 
 session_config:
   session_expiration_time: 60

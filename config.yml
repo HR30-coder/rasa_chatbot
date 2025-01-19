@@ -11,6 +11,35 @@ assistant_id: 20241231-155355-descriptive-url
 language: en
 
 pipeline:
+
+- name: SpacyNLP
+  model: "en_core_web_lg"  # Use spaCy Medium model for better word embeddings
+- name: SpacyTokenizer
+- name: RegexFeaturizer
+- name: SpacyFeaturizer
+  pooling: mean
+- name: LexicalSyntacticFeaturizer
+- name: CountVectorsFeaturizer
+- name: CountVectorsFeaturizer
+  analyzer: char_wb
+  min_ngram: 1
+  max_ngram: 4
+- name: RegexEntityExtractor
+  case_sensitive: false
+- name: DIETClassifier
+  epochs: 100
+  constraint_similarity: true
+- name: SpacyEntityExtractor
+  dimensions:
+    - DATE  # Extract entities of the 'date' dimension
+- name: EntitySynonymMapper
+- name: ResponseSelector
+  epochs: 100
+- name: FallbackClassifier
+  threshold: 0.7
+  ambiguity_threshold: 0.1
+
+
 # - name: WhitespaceTokenizer
 # - name: RegexFeaturizer
 # - name: LexicalSyntacticFeaturizer
@@ -19,44 +48,23 @@ pipeline:
 #   analyzer: char_wb
 #   min_ngram: 1
 #   max_ngram: 4
+# - name: RegexEntityExtractor
+#   case_sensitive: false
 # - name: DIETClassifier
 #   epochs: 100
 # - name: EntitySynonymMapper
 # - name: ResponseSelector
 #   epochs: 100
 # - name: FallbackClassifier
-#   threshold: 0.6
+#   threshold: 0.4
 #   ambiguity_threshold: 0.1
-
-- name: SpacyNLP
-  model: "output/model-best"
-- name: SpacyTokenizer
-- name: SpacyFeaturizer
-  pooling: mean
-- name: LexicalSyntacticFeaturizer
-- name: RegexFeaturizer
-- name: CountVectorsFeaturizer
-- name: CountVectorsFeaturizer
-  analyzer: char_wb
-  min_ngram: 1
-  max_ngram: 2
-- name: DIETClassifier
-  epochs: 100
-  # intent_classification: True
-  # entity_recognition: True
-# - name: RegexEntityExtractor
-#   case_sensitive: False 
-- name: SpacyEntityExtractor
-- name: EntitySynonymMapper 
-- name: ResponseSelector
-  epochs: 100
-- name: FallbackClassifier
-  threshold: 0.6
-  ambiguity_threshold: 0.1
 
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
 policies:
+# # No configuration for policies was provided. The following default policies were used to train your model.
+# # If you'd like to customize them, uncomment and adjust the policies.
+# # See https://rasa.com/docs/rasa/policies for more information.
 - name: MemoizationPolicy
 - name: TEDPolicy
   max_history: 5

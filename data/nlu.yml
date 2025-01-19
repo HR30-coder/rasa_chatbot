@@ -1,110 +1,261 @@
 version: "3.1"
+
 nlu:
-- intent: greet
-  examples: |
-    - Hello
-    - Hi
-    - Hey
-    - Good morning
-    - Hi there
-    - Greetings
-    - Hey there
-    - Hello, I'm Alice
-    - Hi, my name is John
-    - I’m Tim
-    - I am Sarah
-    - Myself Karan  
-    - Hi, I’m Emily
-    - Hello, I’m Alex
-    - Greetings, my name’s Robert
-    - My name is Rajesh Kumar
-    - myself Kartik
+  - regex: email
+    examples: |
+      - [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}
 
-- intent: goodbye
-  examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+  - intent: inform_email
+    examples: |
+      - My email is [john.doe@example.com](email)
+      - You can reach me at [jane_doe123@company.org](email)
+      - My email address is [user123@gmail.com](email)
+      - Send it to [support@website.com](email)
+      - Contact me at [admin@domain.net](email)
+      - I'm available at [info@mydomain.com](email)
+      - its [admin@domain.net](email)
 
-- intent: affirm
-  examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+  - intent: user_details
+    examples: |
+      - What is my [role](role) in the company?
+      - Can you tell me about my [position](role)?
+      - What [system](system) am I using right now?
+      - What [platform](system) is assigned to me?
+      - Tell me what [business area](business) I belong to.
+      - What’s my [position](role) here?
+      - Who am I working with in terms of [business](business)?
+      - Which [system](system) do I have access to?
+      - I need to know my [role](role) in the company.
+      - What [role](role) do I have within the business?
+      - Can you explain which [system](system) I’m a part of?
+      - What [business function](business) am I responsible for?
+      - I’m looking for information about my [role](role).
+      - What’s the [system](system) I’m currently working on?
+      - Which [business area](business) am I assigned to?
+      - Can you clarify my [system](system) access?
+      - What is my [function](role) in the company?
+      - Can you tell me what [business unit](business) I belong to?
+      - Could you remind me of the [system](system) I work with?
+      - What [platform](system) do I operate on?
+      - Which [business team](business) am I part of?
+      - What [role](role) do I hold in the system?
+      - What [area of the business](business) am I working on?
+      - what is my [team](business)?
+      - My email is [john.doe@example.com](email), can you help me with my [role](role)?
+      - Contact me at [jane_doe123@company.org](email), what [platform](system) do I use?
+      - You can reach me at [user123@gmail.com](email), can you tell me my [business area](business)?
+      - Send it to [support@website.com](email), and also let me know my [position](role).
+      - My email is [admin@domain.net](email), what’s my [function](role) in the company?
+      - Can you send this to [info@mydomain.com](email), and also tell me my [system](system)?
+      - My email address is [admin@domain.net](email), can you explain my [business function](business)?
 
-- intent: deny
-  examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - moin
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
 
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+  - intent: goodbye
+    examples: |
+      - cu
+      - good by
+      - cee you later
+      - good night
+      - bye
+      - goodbye
+      - have a nice day
+      - see you around
+      - bye bye
+      - see you later
 
-- intent: inform_email
-  examples: |
-    - My email is [john.doe@example.com](email)
-    - You can reach me at [test.email123@gmail.com](email)
-    - reach me at [test.email123@gmail.com](email)
-    - email is [j.smith@domain.com](email)
-    - My contact email is [admin@website.net](email)
-    - It is [hr30@gmail.com](email)
-    - [hcr30@gmail.com](email)
+  - intent: affirm
+    examples: |
+      - yes
+      - y
+      - indeed
+      - of course
+      - that sounds good
+      - correct
 
-- intent: user_details
-  examples: |
-    - What is my [role](role) in the company?
-    - Can you tell me about my [position](role)?
-    - What [system](system) am I using right now?
-    - What [platform](system) is assigned to me?
-    - Tell me what [business area](business) I belong to.
-    - What’s my [position](role) here?
-    - Who am I working with in terms of [business](business)?
-    - Which [system](system) do I have access to?
-    - I need to know my [role](role) in the company.
-    - What [role](role) do I have within the business?
-    - Can you explain which [system](system) I’m a part of?
-    - What [business function](business) am I responsible for?
-    - I’m looking for information about my [role](role).
-    - What’s the [system](system) I’m currently working on?
-    - Which [business area](business) am I assigned to?
-    - Can you clarify my [system](system) access?
-    - What is my [function](role) in the company?
-    - Can you tell me what [business unit](business) I belong to?
-    - Could you remind me of the [system](system) I work with?
-    - What [platform](system) do I operate on?
-    - Which [business team](business) am I part of?
-    - What [role](role) do I hold in the system?
-    - What [area of the business](business) am I working on?
-    - what is my [team](business) ?
+  - intent: deny
+    examples: |
+      - no
+      - n
+      - never
+      - I don't think so
+      - don't like that
+      - no way
+      - not really
+      - stop
 
-- intent: out_of_scope
-  examples: |
-    - I want to order food
-    - What is 2 + 2?
-    - Who's the US President?
-    - What is a lion?
-    - i want something
+  - intent: out_of_scope
+    examples: |
+      - What's the weather like today?
+      - whats the climate in delhi
+      - whats todays temperature
+      - Tell me a joke.
+      - Can you recommend a good book to read?
+      - How does the stock market work?
+      - What is the capital of France?
+      - Who won the latest football game?
+      - What's your favorite movie?
+      - Can you help me plan a vacation?
+      - Tell me about the latest tech news.
+      - How do I make a cup of coffee?
+      - can you play a song
+      - how many people gave exam last year?
+      - is tomorrow a holiday?
+
+  - intent: bot_challenge
+    examples: |
+      - are you a bot?
+      - are you a human?
+      - am I talking to a bot?
+      - am I talking to a human?
+      - who are you?
+
+  - intent: faq_about_portal
+    examples: |
+      - What is the KPI portal?
+      - Tell me about the KPI portal.
+      - Tell me about this portal.
+      - What does the KPI portal do?
+      - What is this KPI system for?
+
+  - intent: faq_about_process
+    examples: |
+      - How do I track [downtime](downtime) in the KPI portal?
+      - How do I check the [downtime](downtime) for a specific system?
+      - How do I check [downtime](downtime) of a particular system in the portal?
+      - Can I check [downtime](downtime) for systems in the KPI portal?
+      - Can I get [support](support) on how to view [downtime](downtime) and [subprocesses](subprocess)?
+      - I need [support](support) to monitor [downtime](downtime) in the KPI portal for the [subprocess](subprocess) section.
+      - How do I view [downtime](downtime) and [subprocess](subprocess) information together in the portal?
+      - Can you help me track [downtime](downtime) for a particular [subprocess](subprocess)?
+      - How to view [downtime](downtime) by system?
+      - What are the [subprocesses](subprocess) mapped in the KPI portal?
+      - Can you show me the [subprocesses](subprocess) in the KPI portal?
+      - What [subprocesses](subprocess) are tracked in the KPI portal?
+      - What [subprocesses](subprocess) do you track in KPI?
+      - Who can I contact for [help](support) with the KPI portal?
+      - Where can I get [support](support) for the KPI portal?
+      - How do I reach [support](support) for the portal?
+      - How do I reach for [support](support)?
+      - Who do I contact for [assistance](support) with KPI?
+      - How can I track [downtime](downtime) for a specific [subprocess](subprocess) in the KPI portal?
+      - How can I monitor [downtime](downtime)?
+      - What is the [downtime](downtime) tracking feature in the KPI portal?
+      - Can I track system [downtimes](downtime) in KPI portal?
+      - What’s the best way to check [downtime](downtime) for all [subprocesses](subprocess) in the KPI portal?
+      - I need help with tracking [downtime](downtime) in the portal for my [subprocess](subprocess).
+      - Where can I find information about [downtime](downtime) and [subprocess](subprocess) in the KPI portal?
+
+  - intent: faq_important_data
+    examples: |
+      - I want to know the number of [users](user) onboarded this week.
+      - What was the count of [subprocesses](subprocess) reported today?
+      - Please show the number of [downtimes](downtime) reported this week.
+      - How many [users](user) were onboarded this week?
+      - How many [subprocesses](subprocess) have been added this month?
+      - Can you show me how many [kpis](subprocess) and [downtimes](downtime) were reported this week?
+      - How many [downtimes](downtime) and [users](user) occurred this month?
+      - Give me the number of [users](user) and [subprocesses](subprocess) onboarded in the last week.
+      - Show me the [subprocesses](subprocess) and [downtimes](downtime) onboarded this month.
+      - What was the count of [subprocesses](subprocess) and [downtimes](downtime) reported today?
+      - Please show the number of [downtimes](downtime) and [users](user) reported this week.
+      - How many [users](user) and [subprocesses](subprocess) were onboarded this week?
+      - Give me the number of [users](user) onboarded in the last week.
+      - Show me the [subprocesses](subprocess) onboarded this month.
+      - How many [downtimes](downtime) have been reported this week?
+      - Can you give me the number of [users](user) onboarded this month?
+      - How many [subprocesses](subprocess) were onboarded today?
+      - Tell me how many [downtimes](downtime) happened in the last week.
+      - How many [subprocesses](subprocess) and [downtimes](downtime) have been added this month?
+      - How many [downtimes](downtime) and [subprocesses](subprocess) have occurred for the [users](user) this month?
+      - Can you show me how many [subprocesses](subprocess) and [downtimes](downtime) were reported this week along with the number of [users](user) onboarded?
+      - Give me the number of [kpis](subprocess) and [downtimes](downtime) reported today along with the number of [users](user) onboarded.
+      - How many [users](user) were onboarded today?
+      - Can you show me how many [kpis](subprocess) were reported this week?
+      - How many [downtimes](downtime) occurred this month?
+      - Tell me how many [subprocesses](subprocess) and [downtimes](downtime) were reported this month and how many [users](user) were onboarded.
+      - Show me the [users](user) onboarded and [downtimes](downtime) reported this week.
+      - How many [subprocesses](subprocess) and [users](user) were added this month and how many [downtimes](downtime) occurred?
 
 
-regex:
-  - name: email
-    pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+  - intent: flagged_intent
+    examples: |
+      - What is the approval process for new user requests in the KPI portal?
+      - How are user permissions managed in the KPI portal?
+      - Where can I find information about the security protocols of the KPI portal?
+      - Can you explain the steps involved in resetting a user's password in the KPI portal?
+      - How do I grant admin privileges to users in the KPI portal?
+      - Where can I find documentation on the security measures implemented in the KPI portal?
+      - What are the privacy policies for data stored in the KPI portal?
+      - How can I access system audit logs in the KPI portal?
+      - What security measures are in place to protect data in the KPI portal?
+      - How should sensitive data be handled within the KPI portal?
+  
+  - intent: document_search
+    examples: |
+      - Can you explain the step-by-step process for submitting data in the portal?
+      - What is the workflow for generating reports in the KPI portal?
+      - Where can I find the guidelines for integrating third-party systems with the KPI portal?
+      - How do I set up automated alerts for system downtime in the portal?
+      - Can you show me the process flow for generating custom reports in the KPI portal?
+      - How do I track the status of my data submission in the portal?
+      - Where can I find user guides for the KPI portal?
+      - How do I request access to additional features in the KPI portal?
+      - What are the steps to add a new user to the KPI portal?
+      - How can I customize my dashboard in the KPI portal?
+      - I need help uploading files to the KPI portal.
+      - Can you assist with troubleshooting data import errors in the KPI portal?
+      - Where can I find the documentation for setting up user roles in the KPI portal?
+      - I need to review the documentation for customizing notification settings in the KPI portal.
+      - How do I generate a summary report for my system's downtime in the KPI portal?
+      - Where can I find instructions for managing system performance alerts in the portal?
+      - What steps do I need to follow to update my profile information in the KPI portal?
+      - Can you provide guidance on syncing data between multiple systems in the KPI portal?
+      - I want to understand how to manage multiple user access levels in the KPI portal.
+      - Can you help me find the troubleshooting guide for common portal issues?
+      - I need information on how to update portal settings for new team members.
+
+# - intent: faq_track_downtime
+#   examples: |
+#     - How do I track downtime in the KPI portal?
+#     - How can I monitor downtime?
+#     - What is the downtime tracking feature in the KPI portal?
+#     - Can I track system downtimes in KPI portal?
+
+# - intent: faq_subprocesses
+#   examples: |
+#     - What are the subprocesses mapped in the KPI portal?
+#     - Can you show me the subprocesses in the KPI portal?
+#     - What subprocesses are tracked in the KPI portal?
+#     - What subprocesses do you track in KPI?
+
+# - intent: faq_check_downtime_system
+#   examples: |
+#     - How can I check the downtime for a specific system?
+#     - How do I check downtime of a particular system in the portal?
+#     - Can I check downtime for systems in the KPI portal?
+#     - How to view downtime by system?
+
+# - intent: faq_contact_help
+#   examples: |
+#     - Who can I contact for help with the KPI portal?
+#     - Where can I get support for the KPI portal?
+#     - How do I reach support for the portal?
+#     - How do I reach for support?
+#     - Who do I contact for assistance with KPI?
+
+

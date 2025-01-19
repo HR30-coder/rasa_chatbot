@@ -1,37 +1,12 @@
 version: "3.1"
 
 stories:
-
-- story: echo name with name
-  steps:
-  - intent: greet
-    entities:
-      - NAME: "Alice"
-  - action: utter_ask_email_name
-  - intent: inform_email
-    entities:
-      - email: "abc@xyz.in"
-  - action: utter_email
-
-- story: greet without name
-  steps:
-  - intent: greet
-  - action: utter_ask_email
-  - intent: inform_email
-    entities:
-      - email: "abc@xyz.in"
-  - action: utter_email
-
-# - story: sad path 1
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: mood_unhappy
-#   - action: utter_cheer_up
-#   - action: utter_did_that_help
-#   - intent: affirm
-#   - action: utter_happy
+  - story: echo email from user
+    steps:
+      - intent: inform_email
+        entities:
+          - email: "abc@xyz.in"
+      - action: utter_email_received
 
 
-
-
+      

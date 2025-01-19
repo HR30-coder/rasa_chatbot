@@ -1,33 +1,92 @@
 version: "3.1"
 
 rules:
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
 
-# - rule: Greet when user greets
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
+  - rule: Greet anytime the user greets
+    steps:
+      - intent: greet
+      - action: utter_greet
 
-- rule: Say goodbye anytime the user says goodbye
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye
+  - rule: Say 'I am a bot' anytime the user challenges
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
 
-- rule: Say 'I am a bot' anytime the user challenges
-  steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - rule: Handle low confidence intents or ambigous
+    steps:
+      - intent: nlu_fallback
+      - action: utter_fallback_response
 
-- rule: Rely to user detail query
-  steps:
-  - intent: user_details
-  - action: utter_user_details
+  - rule: Submit email form and provide details
+    condition:
+      - active_loop: email_form
+    steps:
+      - action: email_form
+      - active_loop: null  # Deactivate the form once email is collected
+      - slot_was_set:
+          - requested_slot: null  # Clear the requested slot once the form is completed
+      - action: utter_email_received  # Acknowledge the received email
+      - action: utter_user_details  # Provide user details based on the email
 
-- rule: Handle low confidence intents or ambigous
-  steps:
-  - intent: nlu_fallback
-  - action: utter_fallback_response
+  - rule: user details without email (ask for email, then provide details)
+    steps:
+      - intent: user_details
+      - action: email_form  # Ask for email
+      - active_loop: email_form  # Continue form loop until email is collected
 
-- rule: out-of-scope
-  steps:
-  - intent: out_of_scope
-  - action: utter_out_of_scope
+  - rule: Fetch important data based on user query
+    steps:
+      - intent: faq_important_data
+      - action: action_fetch_important_data
+
+  - rule: Respond to FAQ about KPI portal
+    steps:
+      - intent: faq_about_portal
+      - action: utter_faq_kpi_portal
+
+
+  - rule: Handle FAQ queries with downtime, subprocess, or support
+    steps:
+      - intent: faq_about_process
+      - action: action_handle_faq_query
+
+  - rule: Respond to sensitive queries with a security message
+    steps:
+      - intent: flagged_intent
+      - action: utter_sorry_cant_reveal
+  
+  - rule: Process document search query
+    steps:
+      - intent: document_search
+      - action: action_document_search
+
+  # - rule: Respond to FAQ about tracking downtime
+  #   steps:
+  #     - intent: faq_track_downtime
+  #     - action: utter_faq_track_downtime
+
+  # - rule: Respond to FAQ about subprocesses
+  #   steps:
+  #     - intent: faq_subprocesses
+  #     - action: utter_faq_subprocesses
+
+  # - rule: Respond to FAQ about checking downtime for system
+  #   steps:
+  #     - intent: faq_check_downtime_system
+  #     - action: utter_faq_check_downtime_system
+
+  # - rule: Respond to FAQ about contact help
+  #   steps:
+  #     - intent: faq_contact_help
+  #     - action: utter_faq_contact_help
+
+  - rule: Respond to out_of_scope
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+
+      
